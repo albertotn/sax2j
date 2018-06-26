@@ -21,6 +21,7 @@ import org.openmobilealliance.arc.sax2j.json.JsonObject;
 import org.openmobilealliance.arc.sax2j.json.JsonString;
 import org.openmobilealliance.arc.sax2j.json.JsonValue;
 import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
 /**
@@ -124,6 +125,20 @@ public class Translator
     {
       JsonObject lObject = JsonObject.create();
       lret = lObject;
+      NamedNodeMap attributes = xiElement.getAttributes();
+      int numAttributes = attributes.getLength();
+
+      for (int i = 0; i < numAttributes; i++)
+      {
+    	String lKey = attributes.item(i).getNodeName();
+
+    	if (!"xmlns".equals(lKey))
+    	{
+	      String lStrValue = attributes.item(i).getNodeValue();
+	      JsonValue lValue = JsonString.create(lStrValue);
+	      put(xiMode, lObject, null, lKey, lValue);
+    	}
+      }
 
       for (Node lNode = xiElement.getFirstChild();
           lNode != null;
@@ -324,7 +339,8 @@ public class Translator
           {
             // Multiple matches for the element - that's not very sane
             // (although we could just do lMulti = true).
-            throw new RuntimeException("Multiple separate occurrences of the same element: " + xiDecl.getName());
+        	lMulti = true;
+            //throw new RuntimeException("Multiple separate occurrences of the same element: " + xiDecl.getName());
           }
         }
       }

@@ -3,7 +3,6 @@
 package org.openmobilealliance.arc.sax2j.xml;
 
 import org.openmobilealliance.arc.sax2j.ProgressWriter;
-import org.openmobilealliance.arc.sax2j.ProgressWriter.NullProgressWriter;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;

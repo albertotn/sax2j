@@ -65,7 +65,8 @@ public class Main
     JsonValue lJson = mDoc.toJson(TranslationMode.STRUCTURE_AWARE);
 
     StringBuilder lBuffer = new StringBuilder();
-    RenderParams lParams = RenderParams.createPretty();
+    //RenderParams lParams = RenderParams.createPretty();
+    RenderParams lParams = RenderParams.createCompact();
     lJson.render(lBuffer, lParams);
     lBuffer.append("\n");
 
