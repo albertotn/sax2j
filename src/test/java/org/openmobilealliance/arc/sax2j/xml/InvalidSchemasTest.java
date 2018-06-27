@@ -23,7 +23,7 @@ import org.xml.sax.SAXException;
 @RunWith(Parameterized.class)
 public class InvalidSchemasTest
 {
-  private static final String SCHEMA_DIR = "testdata/schemas";
+  private static final String SCHEMA_DIR = "src/test/resources/schemas";
 
   @Parameters(name = "{index}: {0}")
   public static Collection<Object[]> data()

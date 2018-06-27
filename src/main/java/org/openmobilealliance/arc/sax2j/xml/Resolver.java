@@ -11,7 +11,6 @@ import java.util.Map;
 import javax.xml.XMLConstants;
 
 import org.openmobilealliance.arc.sax2j.ProgressWriter;
-import org.openmobilealliance.arc.sax2j.ProgressWriter.NullProgressWriter;
 import org.w3c.dom.ls.LSInput;
 import org.w3c.dom.ls.LSResourceResolver;
 
@@ -22,7 +21,7 @@ public class Resolver implements LSResourceResolver
      *
      * TODO: Preconfigured ones shouldn't be in test data!
      */
-    private static File sSchemaRoot = new File("testdata/schemas");
+    private static File sSchemaRoot = new File(Resolver.class.getClassLoader().getResource(("schemas")).getPath());
 
     /**
      * Where to find common schemas.

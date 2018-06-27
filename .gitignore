@@ -1,6 +1,4 @@
-*.class
-#/sax2j.jar
-/bin
-/testout
-
+.classpath
+.project
+/.settings/
 /target/

@@ -21,7 +21,7 @@ public class ParseSanityTest
   {
     XmlSchema lSchema = new XmlSchema(new File("src/test/resources/schemas",
                                                "simple1.xsd"));
-    XmlDocument lDoc = new XmlDocument(lSchema, new File("testdata/xmldocs",
+    XmlDocument lDoc = new XmlDocument(lSchema, new File("src/test/resources/xmldocs",
                                                          "simple1-ok.xml"));
     try
     {

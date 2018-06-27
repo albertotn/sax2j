@@ -97,5 +97,5 @@ will convert the XML from section 6.11.3.1.2 into JSON, respecting the schema.
 (`sax2j` in the above is an abbreviation for `java -Djava.... -jar sax2j.jar`
 as used earlier).
 
-Further sample data can be found in the `testdata` directories.
+Further sample data can be found in the `src/test/resources` directories.
 
