@@ -15,6 +15,7 @@ import org.apache.xerces.xs.XSParticle;
 import org.apache.xerces.xs.XSTerm;
 import org.apache.xerces.xs.XSTypeDefinition;
 import org.openmobilealliance.arc.sax2j.json.JsonArray;
+import org.openmobilealliance.arc.sax2j.json.JsonBool;
 import org.openmobilealliance.arc.sax2j.json.JsonNull;
 import org.openmobilealliance.arc.sax2j.json.JsonNumber;
 import org.openmobilealliance.arc.sax2j.json.JsonObject;
@@ -57,7 +58,7 @@ public class Translator
    * @param xiElement
    * @return
    */
-  public static JsonValue toJsonValue(TranslationMode xiMode, Element xiElement)
+  private static JsonValue toJsonValue(TranslationMode xiMode, Element xiElement)
   {
     JsonValue lret;
 
@@ -116,6 +117,10 @@ public class Translator
       {
         lret = JsonNumber.create(lValue);
       }
+      else if (lDecl.getTypeDefinition().derivedFrom("http://www.w3.org/2001/XMLSchema", "boolean", (short)-1))
+      {
+        lret = JsonBool.create(lValue.equalsIgnoreCase("true"));
+      }
       else
       {
         lret = JsonString.create(lValue);
@@ -125,16 +130,17 @@ public class Translator
     {
       JsonObject lObject = JsonObject.create();
       lret = lObject;
-      NamedNodeMap attributes = xiElement.getAttributes();
-      int numAttributes = attributes.getLength();
+      NamedNodeMap lAttributes = xiElement.getAttributes();
+      int lNumAttributes = lAttributes.getLength();
 
-      for (int i = 0; i < numAttributes; i++)
+      for (int i = 0; i < lNumAttributes; i++)
       {
-    	String lKey = attributes.item(i).getNodeName();
+        Node lAttribute = lAttributes.item(i);
+    	String lKey = lAttribute.getNodeName();
 
     	if (!"xmlns".equals(lKey))
     	{
-	      String lStrValue = attributes.item(i).getNodeValue();
+	      String lStrValue = lAttribute.getNodeValue();
 	      JsonValue lValue = JsonString.create(lStrValue);
 	      put(xiMode, lObject, null, lKey, lValue);
     	}
@@ -374,7 +380,7 @@ public class Translator
    * @param xiB
    * @return
    */
-  public static boolean isEqualName(XSObject xiA, XSObject xiB)
+  private static boolean isEqualName(XSObject xiA, XSObject xiB)
   {
     if (!xiA.getName().equals(xiB.getName()))
     {
